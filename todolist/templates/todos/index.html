@@ -10,7 +10,21 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
     <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+    <style type="text/css">
+    .feedback {
+      /*background-color : #31B0D5;*/
+      color: white;
+      padding: 30px 20px;
+      border-radius: 50%;
+      /*border-color: #46b8da;*/
+    }
 
+    #mybutton {
+      position: fixed;
+      bottom: 12px;
+      right: 14px;
+    }
+    </style>
 </head>
 <body>
 
@@ -19,8 +33,24 @@
         <div class="col-md-6">
             <div class="todolist not-done">
              <h1>Todos</h1>
-                <input type="text" class="form-control add-todo" placeholder="Add todo">
-                    <button id="checkAll" class="btn btn-success">Mark all as done</button>
+             <form action="{% url 'addTask' %}" method="POST">
+                {% csrf_token %}
+                 <div class="row">
+                    <div class="col-md-10">
+                        <!-- <input type="text" class="form-control add-todo" placeholder="Add todo">  -->
+                        {{ workForm.as_p }}
+                    </div>
+                        <div class="">
+                            <input type="submit" class="btn btn-xl btn-primary" value="Add Task">
+                        </div>
+                    </div>
+             </form>
+             <script type="text/javascript">
+                 document.getElementById("id_task").classList.add("form-control");
+                 document.getElementById("id_task").classList.add("add-todo");
+                 // document.getElementById("id_task").classList.add("mystyle");
+             </script>
+                    <a id="checkAll" class="text-light btn btn-success" href="{% url 'makeAllAsDone' %}"> Mark All As Done</a>
                     
                     <hr>
                     <ul id="sortable" class="list-unstyled">
@@ -30,7 +60,9 @@
                     <li class="ui-state-default">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="" />{{ task.task }}</label>
+                                <a href="{% url 'markDone' task.id %}">
+                                    <input type="checkbox" value="" />{{ task.task }}</label>
+                                </a>
                         </div>
                     </li>
                     {% endif %}
@@ -40,7 +72,11 @@
                 <div class="todo-footer">
                     <strong>
                         <span class="count-todos">
-                        {{ works|length }}
+                           {% if not_done %}
+                                {{ not_done }}
+                            {% else %}
+                            0
+                            {% endif %}
                         </span>
                     </strong>
 
@@ -59,17 +95,36 @@
                         {% if task.is_done %}
                         <li>
                             {{ task.task }}
-                            <button class="remove-item btn btn-default btn-xs pull-right">
+                            <a class="remove-item btn btn-default btn-xs pull-right" href="{% url 'markDone' task.id %}">
                                 <span class="glyphicon glyphicon-remove"></span>
-                            </button>
+                            </a>
                         </li>
                         {% endif %}
                         {% endfor %}
                     
                 </ul>
+                <div class="todo-footer">
+                    <strong>
+                        <span class="count-todos">
+                           {% if is_done %}
+                                {{ is_done }}
+                            {% else %}
+                            0
+                            {% endif %}
+                        </span>
+                    </strong>
+
+                    Items Left
+
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+            
+<div id="mybutton">
+<a class="feedback btn btn-xl btn-danger" href="{% url 'logout' %}">Logout</a>
 </div>
 </body>
 </html>
