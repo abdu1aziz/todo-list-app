@@ -30,7 +30,6 @@ def markDone(request, id):
 		check = workList.objects.filter(id=id).first()
 		if check.is_done:
 			workList.objects.filter(id=id).update(is_done=False)
-			print("\n\nYOU ARE ALLOWED TO CHANGE THIS TASK!!\nTASK_ID: %s\n\n" % (id))
 			return redirect('home')
 		else:
 			workList.objects.filter(id=id).update(is_done=True)
@@ -79,7 +78,8 @@ def removeTask(request, id):
 	return redirect('home')
 
 
-# ADD DELETE TASK FUNCTIONATLITY
-# <a class="remove-item btn btn-default btn-xs pull-right" href="/mark-task-done/2">
-# 	<span class="glyphicon glyphicon-remove"></span>
-# </a>
+# -----------------------------------------
+#   NEW FEATURE TO ADD IN FUTURE (PENDING!)
+# -----------------------------------------
+# Try to add feature where if the task is completed,
+# show completion date/time for that particular task.

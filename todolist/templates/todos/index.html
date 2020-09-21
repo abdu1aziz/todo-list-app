@@ -59,9 +59,10 @@
                     {% if task.is_done is False %}
                     <li class="ui-state-default">
                         <div class="checkbox">
-                            <label>
+                            <label class="popover-dismiss" data-container="body" data-toggle="popover" data-placement="right" data-content="Created On: {{ task.date|date:'M d, Y,' }} {{ task.date|time:'g:i A' }}">
                                 <a href="{% url 'markDone' task.id %}">
                                     <input type="checkbox" value="" />{{ task.task }}</label>
+                                    <br>
                                 </a>
                                 <a class="remove-item btn btn-danger btn-xs pull-right" href="{% url 'removeTask' task.id %}">
                                     <span class="glyphicon glyphicon-remove"></span>
@@ -71,6 +72,11 @@
                     {% endif %}
                     {% endfor %}
 
+                    <script>
+                        $('.popover-dismiss').popover({
+                            trigger: 'hover'
+                        })
+                    </script>
                 </ul>
                 <div class="todo-footer">
                     <strong>
