@@ -66,7 +66,20 @@ def addTask(request):
 	return redirect('home')
 
 
+@login_required(login_url='login')
+def removeTask(request, id):
+	current_userID = request.user.id
+	works = workList.objects.filter(user_id=current_userID).filter(id=id).exists()
+
+	if works:
+		check = workList.objects.filter(id=id)#.first()
+		print("EXIST CHECK ==> %s " % (check.exists()))
+		if check.exists():
+			workList.objects.filter(id=id).delete()
+	return redirect('home')
+
+
 # ADD DELETE TASK FUNCTIONATLITY
 # <a class="remove-item btn btn-default btn-xs pull-right" href="/mark-task-done/2">
-#                                 <span class="glyphicon glyphicon-remove"></span>
-#                             </a>
+# 	<span class="glyphicon glyphicon-remove"></span>
+# </a>

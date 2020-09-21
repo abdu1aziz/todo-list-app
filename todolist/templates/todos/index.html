@@ -63,6 +63,9 @@
                                 <a href="{% url 'markDone' task.id %}">
                                     <input type="checkbox" value="" />{{ task.task }}</label>
                                 </a>
+                                <a class="remove-item btn btn-danger btn-xs pull-right" href="{% url 'removeTask' task.id %}">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </a>
                         </div>
                     </li>
                     {% endif %}
@@ -80,7 +83,7 @@
                         </span>
                     </strong>
 
-                    Items Left
+                    Task(s) Left
 
                 </div>
             </div>
@@ -95,7 +98,7 @@
                         {% if task.is_done %}
                         <li>
                             {{ task.task }}
-                            <a class="remove-item btn btn-default btn-xs pull-right" href="{% url 'markDone' task.id %}">
+                            <a class="remove-item btn btn-warning btn-xs pull-right" href="{% url 'markDone' task.id %}">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </a>
                         </li>
@@ -114,7 +117,7 @@
                         </span>
                     </strong>
 
-                    Items Left
+                    Tasks Completed
 
                 </div>
             </div>
