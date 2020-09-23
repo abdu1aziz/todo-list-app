@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{% block title %}{% endblock %} </title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <!------ Include the above in your HEAD tag ---------->
+	{% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+    <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+    <style type="text/css">
+    .feedback {
+      /*background-color : #31B0D5;*/
+      color: white;
+      padding: 30px 20px;
+      border-radius: 50%;
+      /*border-color: #46b8da;*/
+    }
+
+    #mybutton {
+      position: fixed;
+      bottom: 12px;
+      right: 14px;
+    }
+    </style>
+</head>
+<body>
+  
+    {% block content %}{% endblock %}
+
+
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>  
+</body>
+</html>

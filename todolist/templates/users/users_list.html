@@ -1,0 +1,21 @@
+{% extends 'users/base.html' %}
+
+
+{% block title %} Share Todolist {% endblock %}
+
+{% block content %}
+
+<div class="container">
+        <form class="form-inline" method="POST" action="{% url 'viewUsersList' %}">
+          {% csrf_token %}
+		<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+			<!-- <span class="label-input100">User Email:</span> -->
+			<input class="input100" type="email" name="search" id="search" placeholder="Email Ex: john.smith@gmail.com">
+			<!-- <span class="focus-input100"></span> -->
+		</div>
+        </form>
+
+
+
+</div>
+{% endblock %}

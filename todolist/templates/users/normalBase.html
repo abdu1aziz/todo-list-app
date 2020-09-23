@@ -29,40 +29,10 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<div class="login100-form-title" style="background-image: url({% static 'images/bg-01.jpg' %});">
-					<span class="login100-form-title-1">
-						{% if request.path == '/users/authentication/login/' %}
-						Sign In
-						{% elif request.path == '/users/authentication/registration/' %}
-						Sign up
-						{% elif request.path == '/users/authentication/view-users-list/' %}
-						Share Your TodoList
-						{% endif %}
-					</span>
-				</div>
-				{% block content %}
 
-				{% endblock %}
 
-			</div>
-		</div>
-	</div>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        {% if request.path == '/users/authentication/view-users-list/' %}
-        <script>
-        $(function () {
-            $("#search").autocomplete({
-                source: '{% url 'viewUsersList' %}',
-                minLength: 2
-            });
-        });
-        </script>
-        {% endif %}
+{% block content %}{% endblock %}
+
+
 </body>
 </html>

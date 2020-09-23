@@ -20,3 +20,9 @@ class workList(models.Model):
 	
 	# class Meta:
 	# 	verbose_name_plural = 'Sold Items'
+
+
+# class shareTodoList(models.Model):
+# 	id      = models.AutoField(primary_key=True)
+
+# 	workList = models.ForeignKey(workList, on_delete=models.CASCADE)
