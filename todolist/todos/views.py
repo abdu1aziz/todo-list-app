@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import workList
+from .models import workList, shareTodoList
 
-from .forms import workListForm
+from .forms import workListForm, shareTodoListForm
 # Create your views here.
 
 
@@ -77,7 +77,21 @@ def removeTask(request, id):
 			workList.objects.filter(id=id).delete()
 	return redirect('home')
 
+def shareTask(request):
+	shareForm = shareTodoListForm()
 
+	shareForm = shareTodoListForm(request.POST)
+	if request.method == "POST" and shareForm.is_valid():
+		workList = shareForm.cleaned_data.get('workList')
+		userInfo = shareForm.cleaned_data.get('userInfo')
+		check = shareTodoList.objects.filter(workList=workList, userInfo=userInfo).exists()
+		if check:
+			print("\n\n\nEXISTS\n\n\n")
+		else:
+			shareForm.save()
+			print("\n\n\nNOT EXISTS\n\n\n")
+	context = {'shareForm': shareForm}
+	return render(request, 'todos/shareTask.html', context)
 # -----------------------------------------
 #   NEW FEATURE TO ADD IN FUTURE (PENDING!)
 # -----------------------------------------
